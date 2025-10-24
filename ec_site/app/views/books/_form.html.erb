@@ -1,0 +1,56 @@
+<%= form_with(model: book) do |form| %>
+  <% if book.errors.any? %>
+    <div style="color: red">
+      <h2><%= book.errors.count %> 件エラーが発生しています。</h2>
+
+      <ul>
+        <% book.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.label :書籍名, style: "display: block" %>
+    <%= form.text_field :book_name %>
+  </div>
+
+  <div>
+    <%= form.label :著者名, style: "display: block" %>
+    <%= form.text_field :author_name %>
+  </div>
+
+  <div>
+    <%= form.label :発行日, style: "display: block" %>
+    <%= form.date_field :issue_date %>
+  </div>
+
+  <div>
+    <%= form.label :商品表示, style: "display: block" %>
+    <%= form.check_box :product_display %>
+  </div>
+
+  <div>
+    <%= form.label :価格, style: "display: block" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.label :タグ, style: "display: block" %>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name %>
+  </div>
+
+  <div>
+    <%= form.label :ステータス, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit "登録"%>
+  </div>
+<% end %>

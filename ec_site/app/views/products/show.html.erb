@@ -1,0 +1,33 @@
+<h2>商品詳細</h2>
+
+<% if @product.product_display == true %>
+
+  <p>
+    <strong>書籍名：</strong>
+    <%= @product.book_name %>
+  </p>
+  <p>
+    <strong>著者名：</strong>
+    <%= @product.author_name %>
+  </p>
+  <p>
+    <strong>発行日：</strong>
+    <%= @product.issue_date %>
+  </p>
+  <p>
+    <strong>価格：</strong>
+    <%= @product.price.to_fs(:delimited) %> 円
+  </p>
+  <p>
+    <strong>商品ステータス：</strong>
+    <%= @product.status %>
+  </p>
+
+
+  <%= form_with url: line_items_path(book_id: @product.id), method: :post, local: true do %>
+    <%= label_tag :quantity, '数量' %>
+    <%= number_field_tag :quantity, 1, min: 1, class: 'form-control' %>
+    <%= submit_tag '買い物かごに入れる' %>
+  <% end %>
+
+<% end %>

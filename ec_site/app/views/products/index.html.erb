@@ -1,0 +1,52 @@
+<p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
+<h2>商品一覧</h2>
+
+<div id="books">
+
+  <table>
+  
+    <thead>
+      <tr>
+        <th>書籍名</th>
+        <th>著者名</th>
+        <th>発行日</th>
+        <th>価格</th>
+        <th>商品ステータス</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <% if product.product_display == true %>
+          <tr>
+            <td>
+              <%= product.book_name %>
+            </td>
+            <td>
+              <%= product.author_name %>
+            </td>
+            <td>
+              <%= product.issue_date %>
+            </td>
+            <td>
+              <%= product.price.to_fs(:delimited) %> 円
+            </td>
+            <td>
+              <%= product.status %>
+            </td>
+            <td>
+              <%= link_to "商品詳細", product_path(product.id) %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+
+  <table>
+
+  <%= link_to "買い物かごを確認する", cart_path(id: current_cart.id) %>
+
+</div>

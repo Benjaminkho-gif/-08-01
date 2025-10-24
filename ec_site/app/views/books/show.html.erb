@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @book %>
+
+<div>
+  <p>
+    <strong>タグ名</strong>
+    <%= @book.tags.map(&:tag_name).join(', ') %>
+  </p>
+</div>
+
+<div>
+  <%= link_to "編集", edit_book_path(@book) %> 
+  <%= button_to "書籍の削除", @book, method: :delete %>
+</div>

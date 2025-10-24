@@ -1,0 +1,13 @@
+<p style="color: green"><%= notice %></p>
+
+<h2>書籍一覧</h2>
+
+<div id="books">
+  <% @books.each do |book| %>
+    <%= render book %>
+    <p>
+      <%= link_to "書籍詳細", book %>
+    </p>
+    <br>
+  <% end %>
+</div>

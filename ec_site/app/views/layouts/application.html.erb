@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EcSite</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header>
+      <div>
+        <ul>
+          <!-- 管理者 -->
+          <% if admin_signed_in? %>
+
+            <%= render "layouts/search" %>
+            <li><%= link_to "新規書籍", new_book_path %></li>
+            <li><%= link_to "新規タグ", new_tag_path %></li>
+            <li><%= link_to '書籍一覧', books_path %></li>
+            <li><%= link_to 'タグ一覧', tags_path %></li>
+            <li><%= button_to 'ログアウト', destroy_admin_session_path, method: :delete %></li>
+
+          <!-- ユーザー -->
+          <% elsif user_signed_in? %>
+
+            <%= render "layouts/search" %>
+            <li><%= link_to '書籍一覧', products_path %></li>
+            <li><%= link_to 'ユーザーページ', mypage_path(current_user.id) %></li>
+            <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+
+          <!-- 未ログイン状態 -->
+          <% else %>
+
+            <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+            <li><%= link_to 'ユーザーログイン', new_user_session_path %></li>
+            <li><%= link_to '管理者ログイン', new_admin_session_path %></li>
+
+          <% end %>
+        </ul>
+      </div>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<div>
+  <table>
+    <% if @result == [] %>
+
+      <h3>検索結果がありません。</h3>
+
+    <% elsif @book.present? %>
+
+      <% search_word = @q.book_name_cont %>
+      <h2>検索結果 "<%= search_word %>"</h2>
+      <thead>
+        <tr>
+          <th>書籍名</th>
+          <th>価格</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @book.each do |f| %>
+          <tr>
+            <td>
+              <% if admin_signed_in? %>
+                <%= link_to f.book_name, book_path(f.id) %>
+              <% elsif user_signed_in? %>
+                <%= link_to f.book_name, product_path(f.id) %>
+              <% end %>
+            </td>
+            
+            <td>
+              <%= f.price.to_fs(:delimited) %> 円
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    <% else %>
+      
+      <h3>検索結果がありません。</h3>
+    
+    <% end %>
+  </table>
+</div>

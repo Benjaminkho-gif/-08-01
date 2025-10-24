@@ -1,0 +1,43 @@
+<h2>注文確認画面</h2>
+
+<h3>カートの内容</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>書籍名</th>
+      <th>数量</th>
+      <th>単価</th>
+      <th>合計</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @order_details.each do |detail| %>
+      <tr>
+        <td>
+          <%= detail[:book_name] %>
+        </td>
+        <td>
+          <%= detail[:quantity] %> 冊
+        </td>
+        <td>
+          <%= detail[:price].to_fs(:delimited) %> 円
+        </td>
+        <td>
+          <%= detail[:total_price].to_fs(:delimited) %> 円
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><strong>合計金額：<%= @order.total.to_fs(:delimited) %> 円</strong></p>
+<p><strong>送り先：<%= @order.delivery_address %></strong></p>
+
+<%= form_with(model: @order, url: orders_path(@order), data: { turbo_method: :POST }) do |f| %>
+  <%= f.hidden_field :delivery_address, value: @order.delivery_address %>
+  <%= f.submit '注文確定' %>
+<% end %>
+
+<%= link_to '戻る', new_order_path %>

@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<h2>買い物かご</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>書籍名</th>
+      <th>数量</th>
+      <th>単価</th>
+      <th>小計</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.line_items.each do |item| %>
+      <tr>
+        <td>
+          <%= item.book.book_name %>
+        </td>
+        <td>
+          <%= item.quantity %>
+        </td>
+        <td>
+          <%= item.price.to_fs(:delimited) %>円
+        </td>
+        <td>
+          <%= item.total_price.to_fs(:delimited) %>円
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><strong>合計金額:</strong> <%= @cart.total_price.to_fs(:delimited) %> 円</p>
+<p><strong>合計個数:</strong> <%= @cart.total_number %> 冊</p>
+
+<% if @cart.line_items.present? %>
+  <%= link_to '注文する', new_order_path %> | 
+  <%= link_to '買い物かごを空にする', cart_path, data: { turbo_method: :delete, turbo_confirm: "カートを空にしますか？" } %>
+
+<% end %>

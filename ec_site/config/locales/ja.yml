@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      book: "本"
+    attributes:
+      book:
+        book_name: "書籍名"
+        author_name: "著者名"
+        issue_date: "発行日"
+        price: "価格"

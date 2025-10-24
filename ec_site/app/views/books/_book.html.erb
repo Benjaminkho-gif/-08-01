@@ -1,0 +1,35 @@
+<div id="<%= dom_id book %>">
+
+  <% if admin_signed_in? %>
+
+    <% if book.image.attached? %>
+      <%= image_tag book.image, size: "200x200" %>
+    <% end %>
+    <p>
+      <strong>書籍名：</strong>
+      <%= book.book_name %>
+    </p>
+    <p>
+      <strong>著者名：</strong>
+      <%= book.author_name %>
+    </p>
+    <p>
+      <strong>発行日：</strong>
+      <%= book.issue_date %>
+    </p>
+    <p>
+      <strong>商品表示：</strong>
+      <%= book.product_display %>
+    </p>
+    <p>
+      <strong>価格：</strong>
+      <%= book.price.to_fs(:delimited) %>
+    </p>
+    <p>
+      <strong>ステータス：</strong>
+      <%= book.status %>
+    </p>
+
+  <% end %>
+
+</div>

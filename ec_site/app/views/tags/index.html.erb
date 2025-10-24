@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>タグ一覧</h1>
+
+<div id="tags">
+  <% @tags.each do |tag| %>
+    <%= render tag %>
+    <p>
+
+      <%= button_to "タグの削除", tag, method: :delete %>
+
+    </p>
+  <% end %>
+</div>
