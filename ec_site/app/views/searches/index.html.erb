@@ -1,0 +1,22 @@
+<h1>検索結果</h1>
+
+<%= search_form_for @q, url: searches_path, method: :get, remote: true do |f| %>
+  <div class="field">
+    <%= f.label :book_name_cont, "タイトル" %>
+    <%= f.search_field :book_name_cont, placeholder: "タイトルで検索" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :author_name_cont, "著者" %>
+    <%= f.search_field :author_name_cont, placeholder: "著者で検索" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "検索" %>
+    <%= link_to "クリア", searches_path, data: { turbo: false } %>
+  </div>
+<% end %>
+
+<div id="books-results">
+  <%= render partial: 'books_list', locals: { books: @books } %>
+</div>

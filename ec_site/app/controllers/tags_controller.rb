@@ -1,9 +1,14 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: %i[ show destroy ]
+  before_action :set_tag, only: %i[show destroy]
 
   # GET /tags or /tags.json
   def index
     @tags = Tag.all
+  end
+
+  # GET /tags/1
+  def show
+    # The @tag variable is set by the set_tag callback
   end
 
   # GET /tags/new

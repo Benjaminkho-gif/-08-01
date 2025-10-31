@@ -1,10 +1,22 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: %i[ show edit update destroy ]
-  before_action :admin_scan, only: %i[ show edit update destroy ]
+  before_action :set_book, only: %i[show edit update destroy]
+  before_action :admin_scan, only: %i[show edit update destroy]
 
   # GET /books or /books.json
   def index
-    @books = Book.all
+    # Initialize the Ransack search object
+    @q = Book.ransack(params[:q])
+
+    # Get the filtered books from the search
+    @books = @q.result(distinct: true)
+
+    # Optional: Pagination with Kaminari or WillPaginate
+    @books = @books.page(params[:page])
+    
+    respond_to do |format|
+      format.html
+      format.js   # respond to AJAX (index.js.erb) for same-page updates
+    end
   end
 
   # GET /books/1 or /books/1.json
@@ -66,12 +78,12 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :status, :image, tag_ids: []) # 追加
+      params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :status, :image, tag_ids: [])
     end
 
     def admin_scan
       unless admin_signed_in?
-        redirect_to products_path   #管理者以外が管理者のみ実行できるアクションを実行しようとしたときのリダイレクト先
+        redirect_to products_path  # Redirect to products_path if admin is not signed in
       end
     end
 end

@@ -1,0 +1,18 @@
+<% if books.present? %>
+  <div class="books-grid">
+    <% books.each do |book| %>
+      <div class="book-item">
+        <h3><%= link_to book.book_name, book_path(book) %></h3>
+        <p>著者: <%= h(book.author_name) %></p>
+        <p>刊行日: <%= book.issue_date %></p>
+        <p>価格: <%= number_to_currency(book.price, unit: "¥") if book.price.present? %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="pagination">
+    <%= paginate books if defined?(paginate) %>
+  </div>
+<% else %>
+  <p>該当する書籍は見つかりませんでした。</p>
+<% end %>

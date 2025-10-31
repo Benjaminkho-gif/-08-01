@@ -2,6 +2,14 @@
 
 <% if @product.product_display == true %>
 
+  <!-- Display Book Image -->
+  <% if @product.image.attached? %> <!-- Check if the product has an image -->
+    <div>
+      <%= image_tag @product.image, size: "200x200" %> <!-- Display the image -->
+    </div>
+  <% end %>
+
+  <!-- Product Details -->
   <p>
     <strong>書籍名：</strong>
     <%= @product.book_name %>
@@ -23,7 +31,7 @@
     <%= @product.status %>
   </p>
 
-
+  <!-- Quantity input and Add to Cart Form -->
   <%= form_with url: line_items_path(book_id: @product.id), method: :post, local: true do %>
     <%= label_tag :quantity, '数量' %>
     <%= number_field_tag :quantity, 1, min: 1, class: 'form-control' %>

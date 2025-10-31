@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     # Set the root for users to login page
     root "users/sessions#new"
   end
+  # Route for searches
+  get 'searches', to: 'searches#index', as: 'searches'
 
   # Custom routes for other resources
   resources :tags, only: [:index, :new, :create, :destroy]
@@ -32,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   # Search functionality
-  get '/search', to: 'searchs#search'
+  # (legacy) /search route removed — use /searches (searches#index) instead
 
   # If you want to use sign_out link for users in views (correct method handling):
   # Example:
