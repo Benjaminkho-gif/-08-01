@@ -13,7 +13,7 @@
         <th>著者名</th>
         <th>発行日</th>
         <th>価格</th>
-        <th>商品ステータス</th>
+        <th>タグ</th>
         <th></th>
       </tr>
     </thead>
@@ -34,11 +34,11 @@
             <td>
               <%= product.price.to_fs(:delimited) %> 円
             </td>
-            <td>
-              <%= product.status %>
+              <td>
+              <%= product.tags.map(&:tag_name).join(", ") %>
             </td>
             <td>
-              <%= link_to "商品詳細", product_path(product.id) %>
+              <%= link_to "商品を買う", product_path(product.id) %>
             </td>
           </tr>
         <% end %>

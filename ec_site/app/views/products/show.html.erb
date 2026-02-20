@@ -26,10 +26,7 @@
     <strong>価格：</strong>
     <%= @product.price.to_fs(:delimited) %> 円
   </p>
-  <p>
-    <strong>商品ステータス：</strong>
-    <%= @product.status %>
-  </p>
+
 
   <!-- Quantity input and Add to Cart Form -->
   <%= form_with url: line_items_path(book_id: @product.id), method: :post, local: true do %>

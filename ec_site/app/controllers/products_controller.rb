@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
     end
 
     def book_params
-      params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :status, :image, tag_ids: []) # 追加
+      params.require(:book).permit(:book_name, :author_name, :issue_date, :product_display, :price, :image, tag_ids: []) # 追加
     end
 
 end

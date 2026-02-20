@@ -45,10 +45,7 @@
     <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :tag_name %>
   </div>
 
-  <div>
-    <%= form.label :ステータス, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
+
   
   <div class="actions">
     <%= form.submit "登録"%>

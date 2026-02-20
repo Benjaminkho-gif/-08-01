@@ -1,6 +1,7 @@
 class Book < ApplicationRecord
-  has_many :tagging, dependent: :destroy
-  has_many :tags, through: :tagging
+  # Associations
+  has_many :taggings, dependent: :destroy        # corrected plural
+  has_many :tags, through: :taggings
     
   has_one_attached :image
 
@@ -14,7 +15,13 @@ class Book < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["book_name", "author_name", "issue_date", "price", "created_at", "updated_at"]
   end
+
+  # Allowlist searchable associations for Ransack
+  def self.ransackable_associations(auth_object = nil)
+    ["carts", "image_attachment", "image_blob", "line_items", "order_details", "orders", "taggings", "tags"]
+  end
   
+  # Validations
   validates :book_name, presence: true
   validates :author_name, presence: true
   validates :issue_date, presence: true

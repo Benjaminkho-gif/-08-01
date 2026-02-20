@@ -1,7 +1,8 @@
 <%= search_form_for @q, url: searches_path do |f| %>
   <div>
-    <%= f.search_field :book_name_cont %>  <!-- This will search the 'book_name' field -->
-    <%= f.search_field :author_name_cont %> <!-- This will search the 'author_name' field -->
+    <%= f.search_field :book_name_cont, placeholder: "本の名前" %>
+    <%= f.search_field :author_name_cont, placeholder: "著者名" %>
+    <%= f.search_field :tags_tag_name_cont, placeholder: "タグ名" %>
     <button type="submit" style="width: 100px; height: 25px;">
       検索ボタン
     </button>
